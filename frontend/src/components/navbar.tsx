@@ -1,10 +1,11 @@
 import React from 'react';
+import Image from 'next/image';
 
 const Navbar: React.FC = () => {
     return (
         <div className="navbar bg-base-100">
             <div className="flex-1">
-                <a className="btn btn-ghost text-xl">daisyUI</a>
+                <a className="btn btn-ghost text-xl">SafeSpeak</a>
             </div>
             <div className="flex-none gap-2">
                 <div className="form-control">
@@ -13,9 +14,7 @@ const Navbar: React.FC = () => {
                 <div className="dropdown dropdown-end">
                     <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
                         <div className="w-10 rounded-full">
-                            <img
-                                alt="Tailwind CSS Navbar component"
-                                src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+                            <Image src={""} alt={''} />
                         </div>
                     </div>
                     <ul
