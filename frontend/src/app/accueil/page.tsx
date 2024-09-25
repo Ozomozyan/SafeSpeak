@@ -1,24 +1,11 @@
 import React from 'react';
 import Navbar from '@/components/navbar';
 
-const App: React.FC = () => {
+const Acceuil: React.FC = () => {
     return (
         <div className="bg-base-200">
             <Navbar />
-            {/* Hero Section */}
-            <header className="min-h-screen bg-cover bg-center flex flex-col items-center justify-center text-white"
-                style={{ backgroundImage: 'url("https://img.daisyui.com/images/stock/photo-1494253109108-2e30c049369b.webp")' }}>
-                <div className="text-center">
-                    <h1 className="text-6xl font-bold">Bienvenue sur notre site</h1>
-                    <p className="mt-6 text-xl">
-                        Explorez nos services et découvrez comment nous pouvons vous aider à réussir.
-                    </p>
-                    <div className="mt-8">
-                        <button className="btn btn-primary mr-4">Commencer</button>
-                        <button className="btn btn-secondary">Contactez-nous</button>
-                    </div>
-                </div>
-            </header>
+
 
             {/* Section Services */}
             <section className="py-16 text-center">
@@ -124,6 +111,6 @@ const App: React.FC = () => {
     );
 };
 
-export default App;
+export default Acceuil;
 
 

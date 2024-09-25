@@ -1,7 +1,18 @@
+"use client";
+
 import React from 'react';
 import Navbar from '@/components/navbar';
+import { useRouter } from "next/navigation";
+
 
 const App: React.FC = () => {
+
+  const router = useRouter();
+
+  const handleCommencerClick = () => {
+    router.push('/accueil');
+  };
+
   return (
     <div className="bg-base-200">
       <Navbar />
@@ -16,13 +27,13 @@ const App: React.FC = () => {
             Participez aux discussions, explorez nos catégories, et partagez vos idées avec notre communauté.
           </p>
           <div className="mt-8">
-            <button className="btn btn-primary mr-4">Commencer</button>
+            <button className="btn btn-primary mr-4" onClick={handleCommencerClick}>Commencer</button>
             <button className="btn btn-secondary">S'inscrire</button>
           </div>
         </div>
       </header>
 
-      {/* Footer amélioré */}
+      {/* Footer*/}
       <footer className="footer p-10 bg-base-300 text-base-content">
         <div>
           <h4 className="font-bold">À propos du Forum</h4>
