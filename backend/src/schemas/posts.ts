@@ -2,6 +2,7 @@ import z from "zod";
 import mongoose, { Schema } from "mongoose";
 
 export const PostType = z.object({
+    id: z.string(),
     title: z.string(),
     content: z.string(),
     userId: z.string(),
@@ -11,6 +12,7 @@ export const PostType = z.object({
 });
 
 export const PostSchema = new Schema({
+    id: { type: String, required: true },
     title: { type: String, required: true },
     content: { type: String, required: true },
     userId: { type: String, required: true },
