@@ -1,6 +1,7 @@
 import { Express, Request, Response } from "express";
 import bodyParser from "body-parser";
 import { UserModel } from "@/schemas/users";
+import { getUserIdAndIncrement } from "@/database/mongo";
 
 const jsonParser = bodyParser.json();
 
@@ -44,7 +45,11 @@ export function configure(app: Express) {
                 return;
             }
 
-            const newUser = new UserModel({ email, password });
+            const newUser = new UserModel({
+                id: getUserIdAndIncrement(),
+                email: email,
+                password: password,
+            });
             await newUser.save();
 
             res.json({ id: newUser.id });

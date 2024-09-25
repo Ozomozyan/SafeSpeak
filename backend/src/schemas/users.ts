@@ -2,13 +2,13 @@ import z from "zod";
 import mongoose, { Schema } from "mongoose";
 
 export const UserType = z.object({
-    id: z.string(),
+    id: z.number().default(0),
     email: z.string(),
     password: z.string(),
 });
 
 export const UserSchema = new Schema({
-    id: { type: String, required: true },
+    id: { type: Number, required: true },
     email: { type: String, required: true },
     password: { type: String, required: true },
 });
