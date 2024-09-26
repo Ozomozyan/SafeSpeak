@@ -7,7 +7,7 @@ const Navbar: React.FC = () => {
         <div className="navbar bg-base-100">
             <div className="flex-1">
                 <Link href="/accueil" className="btn btn-ghost flex items-center">
-                    <img src="https://cdn.discordapp.com/attachments/1153257187049742356/1288802935626666017/IMG_9231.png?ex=66f682c4&is=66f53144&hm=4b4b4fa917502a145f2f68be8bfb8a5607eeba9b4f1e602cda69f2c8364d18c8&" alt="SafeSpeak Logo" className="h-10 w-10 rounded-full mr-2" />
+                    <img src="/logoworkshop.png" alt="SafeSpeak Logo" className="h-10 w-30 mr-2" />
                     <span className="text-xl">SafeSpeak</span>
                 </Link>
             </div>

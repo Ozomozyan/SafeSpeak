@@ -6,7 +6,7 @@ export const PostType = z.object({
     title: z.string(),
     content: z.string(),
     userId: z.string(),
-    createdAt: z.date(),
+    createdAt: z.date().or(z.string()),
     userName: z.string().nullish(),
     replyTo: z.string().nullish(),
 });

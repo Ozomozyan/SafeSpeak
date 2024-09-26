@@ -34,7 +34,6 @@ const emergencyNumbers = [
 const UrgencePage: React.FC = () => {
     const [searchTerm, setSearchTerm] = useState("");
 
-    // Filtrer les numéros d'urgence
     const filteredNumbers = emergencyNumbers.filter(item =>
         item.number.includes(searchTerm) || item.description.toLowerCase().includes(searchTerm.toLowerCase())
     );
@@ -56,7 +55,7 @@ const UrgencePage: React.FC = () => {
                         <div className="card shadow-lg hover:shadow-2xl transition-shadow duration-300" key={index}>
                             <div className="card-body">
                                 <h3 className="card-title text-xl font-bold text-primary">{item.number}</h3>
-                                <p className="text-gray-700">{item.description}</p>
+                                <p className="text-white">{item.description}</p>
                             </div>
                         </div>
                     ))}

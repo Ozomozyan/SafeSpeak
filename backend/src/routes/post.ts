@@ -10,6 +10,7 @@ export function configure(app: Express) {
         "/post/create",
         jsonParser,
         async (req: Request, res: Response) => {
+
             const data = PostType.safeParse(req.body);
 
             if (!data.success) {
@@ -22,12 +23,22 @@ export function configure(app: Express) {
             const id = getPostIdAndIncrement();
             post.id = id;
 
-            await PostModel.create({ post });
+            await PostModel.create({
+                id: post.id,
+                title: post.title,
+                content: post.content,
+                userId: post.userId,
+                userName: post.userName,
+                replyTo: post.replyTo,
+                createdAt: post.createdAt,
+            });
+            res.json(post);
         }
     );
 
     app.get("/post/all", async (_: Request, res: Response) => {
         const posts = await PostModel.find().exec();
+        console.log(posts)
         res.json(posts);
     });
 
@@ -46,6 +57,21 @@ export function configure(app: Express) {
     app.get("/post/:id/replies", async (req: Request, res: Response) => {
         const id = parseInt(req.params.id);
         const posts = await PostModel.find({ replyTo: id }).exec();
-        res.json(posts);
+        const tosend: Post[] = [];
+
+        posts.forEach(post => {
+            const posted: Post = {
+                id: post.id,
+                content: post.content,
+                createdAt: post.createdAt!!.toDateString(),
+                title: post.title,
+                userId: post.userId,
+                replyTo: post.replyTo,
+                userName: post.userName
+            }
+            tosend.push(posted)
+        });
+
+        res.json(tosend);
     });
 }

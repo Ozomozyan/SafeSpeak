@@ -14,14 +14,19 @@ interface Post {
 }
 
 const PostSchema = z.object({
-    id: z.number(),
+    id: z.string(),
     title: z.string(),
     content: z.string(),
     userId: z.string(),
-    createdAt: z.date(),
+    createdAt: z.date().or(z.string()),
     userName: z.string().optional(),
     replyTo: z.string().optional(),
 });
+const generateUniqueId = (): string => {
+    const timestamp = Date.now().toString(); // Obtenir le timestamp actuel
+    const randomNum = Math.floor(Math.random() * 1000); // Générer un nombre aléatoire
+    return `${timestamp}-${randomNum}`; // Combiner le timestamp et le nombre aléatoire
+};
 
 const Acceuil: React.FC = () => {
     const [posts, setPosts] = useState<Post[]>([]);
@@ -40,7 +45,7 @@ const Acceuil: React.FC = () => {
                 const parsedPosts = data.map((post: any) => {
                     const result = PostSchema.safeParse(post);
                     if (!result.success) {
-                        throw new Error('Validation échouée pour un ou plusieurs posts');
+                        throw result.error;
                     }
                     return result.data;
                 });
@@ -63,15 +68,18 @@ const Acceuil: React.FC = () => {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
-            const response = await fetch('/post/create', {
+            const postId = generateUniqueId();
+            const response = await fetch('http://localhost:9552/post/create', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
+                    id: postId,
                     title: newPost.title,
                     content: newPost.content,
-                    userId: 'user-id', // Replace with actual user ID or retrieve it from context
+                    userId: 'user-id',
+                    createdAt: new Date(),
                 }),
             });
             if (!response.ok) {
@@ -80,7 +88,7 @@ const Acceuil: React.FC = () => {
             const newPostData = await response.json();
             const result = PostSchema.safeParse(newPostData);
             if (!result.success) {
-                throw new Error('Validation échouée pour le nouveau post');
+                throw result.error;
             }
             setPosts(prev => [...prev, result.data]);
             setNewPost({ title: '', content: '' });
