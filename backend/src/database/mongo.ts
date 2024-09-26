@@ -1,5 +1,5 @@
-import { PostModel } from "@/schemas/posts";
-import { UserModel } from "@/schemas/users";
+import { PostModel } from "../schemas/posts";
+import { UserModel } from "../schemas/users";
 import mongoose, { model } from "mongoose";
 
 let userId = 0;

@@ -1,7 +1,7 @@
 import { Express, Request, Response } from "express";
 import bodyParser from "body-parser";
-import { UserModel } from "@/schemas/users";
-import { getUserIdAndIncrement } from "@/database/mongo";
+import { UserModel } from "../schemas/users";
+import { getUserIdAndIncrement } from "../database/mongo";
 
 const jsonParser = bodyParser.json();
 
