@@ -26,6 +26,11 @@ export function configure(app: Express) {
         }
     );
 
+    app.get("/post/all", async (_: Request, res: Response) => {
+        const posts = await PostModel.find().exec();
+        res.json(posts);
+    });
+
     app.get("/post/:id", async (req: Request, res: Response) => {
         const id = parseInt(req.params.id);
         const post = await PostModel.findOne({ id: id }).exec();
@@ -41,11 +46,6 @@ export function configure(app: Express) {
     app.get("/post/:id/replies", async (req: Request, res: Response) => {
         const id = parseInt(req.params.id);
         const posts = await PostModel.find({ replyTo: id }).exec();
-        res.json(posts);
-    });
-
-    app.get("/post/all", async (_: Request, res: Response) => {
-        const posts = await PostModel.find().exec();
         res.json(posts);
     });
 }
