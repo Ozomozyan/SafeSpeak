@@ -29,6 +29,13 @@ const Acceuil: React.FC = () => {
     const [error, setError] = useState<string | null>(null);
     const [newPost, setNewPost] = useState<{ title: string; content: string }>({ title: '', content: '' });
 
+    // Nouveaux états pour la modale et les réponses
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [selectedPost, setSelectedPost] = useState<Post | null>(null);
+    const [replies, setReplies] = useState<Post[]>([]);
+    const [newReply, setNewReply] = useState<string>('');
+    const [loadingReplies, setLoadingReplies] = useState<boolean>(false);
+
     useEffect(() => {
         const fetchPosts = async () => {
             try {
@@ -55,6 +62,22 @@ const Acceuil: React.FC = () => {
         fetchPosts();
     }, []);
 
+    const fetchReplies = async (postId: number) => {
+        setLoadingReplies(true);
+        try {
+            const response = await fetch(`http://localhost:9552/post/${postId}/replies`);
+            if (!response.ok) {
+                throw new Error(`Erreur HTTP : ${response.status}`);
+            }
+            const data = await response.json();
+            setReplies(data);
+            setLoadingReplies(false);
+        } catch (error) {
+            console.error('Erreur lors de la récupération des réponses :', error);
+            setLoadingReplies(false);
+        }
+    };
+
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target;
         setNewPost(prev => ({ ...prev, [name]: value }));
@@ -63,17 +86,15 @@ const Acceuil: React.FC = () => {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
-
             const response = await fetch('http://localhost:9552/post/create', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-
                     title: newPost.title,
                     content: newPost.content,
-                    userId: 'user-id',
+                    userId: 'user-id', // Remplace par le bon ID utilisateur
                     createdAt: new Date(),
                 }),
             });
@@ -90,6 +111,49 @@ const Acceuil: React.FC = () => {
         } catch (err) {
             console.error('Erreur lors de la création du post :', err);
             setError(err instanceof Error ? err.message : 'Erreur lors de la création du post.');
+        }
+    };
+
+    const handleOpenModal = (post: Post) => {
+        setSelectedPost(post);
+        setIsModalOpen(true);
+        fetchReplies(post.id); // Récupérer les réponses pour ce post
+    };
+
+    const handleCloseModal = () => {
+        setSelectedPost(null);
+        setIsModalOpen(false);
+        setReplies([]); // Réinitialiser les réponses lors de la fermeture
+    };
+
+    const handleReplySubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        if (!newReply.trim()) return;
+
+        try {
+            const response = await fetch('http://localhost:9552/post/create', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    title: 'Réponse',
+                    content: newReply,
+                    userId: 'user-id',
+                    replyTo: selectedPost?.id,
+                    createdAt: new Date(),
+                }),
+            });
+
+            if (!response.ok) {
+                throw new Error(`Erreur HTTP : ${response.status}`);
+            }
+
+            const newReplyData = await response.json();
+            setReplies(prev => [...prev, newReplyData]);
+            setNewReply('');
+        } catch (error) {
+            console.error('Erreur lors de la publication de la réponse :', error);
         }
     };
 
@@ -134,7 +198,9 @@ const Acceuil: React.FC = () => {
                                 <h3 className="card-title text-xl font-bold">{post.title}</h3>
                                 <p className="text-gray-700">{post.content}</p>
                                 <div className="card-actions justify-end">
-                                    <button className="btn btn-outline">Voir la discussion</button>
+                                    <button className="btn btn-outline" onClick={() => handleOpenModal(post)}>
+                                        Voir la discussion
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -144,6 +210,47 @@ const Acceuil: React.FC = () => {
                     <button className="btn btn-primary">Voir toutes les discussions</button>
                 </div>
             </section>
+
+            {/* Modal pour afficher le post complet et ses réponses */}
+            {isModalOpen && selectedPost && (
+                <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+                    <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg w-1/2">
+                        <h3 className="text-2xl font-bold mb-4 text-primary dark:text-primary">{selectedPost.title}</h3>
+                        <p className="text-gray-700 dark:text-gray-300">{selectedPost.content}</p>
+
+                        {/* Réponses */}
+                        <div className="mt-6">
+                            <h4 className="text-xl font-semibold text-primary dark:text-primary mb-4">Réponses :</h4>
+                            {loadingReplies ? (
+                                <p>Chargement des réponses...</p>
+                            ) : (
+                                replies.map((reply) => (
+                                    <div key={reply.id} className="bg-gray-100 dark:bg-gray-700 p-4 rounded-lg mb-4">
+                                        <p className="text-gray-700 dark:text-gray-300">{reply.content}</p>
+                                    </div>
+                                ))
+                            )}
+
+                            <form onSubmit={handleReplySubmit} className="mt-4">
+                                <textarea
+                                    value={newReply}
+                                    onChange={(e) => setNewReply(e.target.value)}
+                                    placeholder="Votre réponse..."
+                                    className="textarea textarea-bordered w-full mb-4"
+                                    required
+                                />
+                                <button type="submit" className="btn btn-primary">Répondre</button>
+                            </form>
+                        </div>
+
+                        <div className="mt-6 flex justify-end">
+                            <button className="btn btn-secondary dark:btn-primary" onClick={handleCloseModal}>
+                                Fermer
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
 
             {/* Footer */}
             <footer className="footer p-10 bg-base-300 text-base-content">
