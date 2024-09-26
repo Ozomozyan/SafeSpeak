@@ -4,9 +4,7 @@ import React from 'react';
 import Navbar from '@/components/navbar';
 import { useRouter } from "next/navigation";
 
-
 const App: React.FC = () => {
-
   const router = useRouter();
 
   const handleCommencerClick = () => {
@@ -26,14 +24,14 @@ const App: React.FC = () => {
           <p className="mt-6 text-xl">
             Participez aux discussions, explorez nos catégories, et partagez vos idées avec notre communauté.
           </p>
-          <div className="flex-none gap-2">
+          <div className="flex-none gap-4"> {/* Use gap for spacing */}
+            <a href="/register" className="btn btn-secondary">Register</a> {/* Register button first */}
             <a href="/login" className="btn btn-primary">Login</a>
-            <a href="/register" className="btn btn-secondary">Register</a>
           </div>
         </div>
       </header>
 
-      {/* Footer*/}
+      {/* Footer */}
       <footer className="footer p-10 bg-base-300 text-base-content">
         <div>
           <h4 className="font-bold">À propos du Forum</h4>
