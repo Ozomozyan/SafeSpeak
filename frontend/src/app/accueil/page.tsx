@@ -29,7 +29,7 @@ const Acceuil: React.FC = () => {
     const [error, setError] = useState<string | null>(null);
     const [newPost, setNewPost] = useState<{ title: string; content: string }>({ title: '', content: '' });
 
-    // Nouveaux états pour la modale et les réponses
+
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedPost, setSelectedPost] = useState<Post | null>(null);
     const [replies, setReplies] = useState<Post[]>([]);
@@ -94,7 +94,7 @@ const Acceuil: React.FC = () => {
                 body: JSON.stringify({
                     title: newPost.title,
                     content: newPost.content,
-                    userId: 'user-id', // Remplace par le bon ID utilisateur
+                    userId: 'user-id',
                     createdAt: new Date(),
                 }),
             });
@@ -117,13 +117,13 @@ const Acceuil: React.FC = () => {
     const handleOpenModal = (post: Post) => {
         setSelectedPost(post);
         setIsModalOpen(true);
-        fetchReplies(post.id); // Récupérer les réponses pour ce post
+        fetchReplies(post.id);
     };
 
     const handleCloseModal = () => {
         setSelectedPost(null);
         setIsModalOpen(false);
-        setReplies([]); // Réinitialiser les réponses lors de la fermeture
+        setReplies([]);
     };
 
     const handleReplySubmit = async (e: React.FormEvent) => {
@@ -161,7 +161,7 @@ const Acceuil: React.FC = () => {
         <div className="bg-base-200">
             <Navbar />
 
-            {/* Section Créer un Post */}
+
             <section className="py-16 text-center">
                 <h2 className="text-4xl font-bold mb-6 text-primary">Créer un nouveau post</h2>
                 <form onSubmit={handleSubmit} className="mb-10">
@@ -186,7 +186,7 @@ const Acceuil: React.FC = () => {
                 </form>
             </section>
 
-            {/* Section Discussions Récentes */}
+
             <section className="py-16 text-center">
                 <h2 className="text-4xl font-bold mb-6 text-primary">Discussions récentes</h2>
                 {loading && <p>Chargement des discussions...</p>}
@@ -211,14 +211,14 @@ const Acceuil: React.FC = () => {
                 </div>
             </section>
 
-            {/* Modal pour afficher le post complet et ses réponses */}
+
             {isModalOpen && selectedPost && (
                 <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
                     <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg w-1/2">
                         <h3 className="text-2xl font-bold mb-4 text-primary dark:text-primary">{selectedPost.title}</h3>
                         <p className="text-gray-700 dark:text-gray-300">{selectedPost.content}</p>
 
-                        {/* Réponses */}
+
                         <div className="mt-6">
                             <h4 className="text-xl font-semibold text-primary dark:text-primary mb-4">Réponses :</h4>
                             {loadingReplies ? (
@@ -252,7 +252,7 @@ const Acceuil: React.FC = () => {
                 </div>
             )}
 
-            {/* Footer */}
+
             <footer className="footer p-10 bg-base-300 text-base-content">
                 <div>
                     <h4 className="font-bold">Notre entreprise</h4>

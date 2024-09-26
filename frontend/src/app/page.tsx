@@ -22,7 +22,7 @@ const App: React.FC = () => {
         <div className="text-center max-w-xl">
           <h1 className="text-6xl font-bold">Bienvenue sur le Forum</h1>
           <p className="mt-6 text-xl">
-            Participez aux discussions, explorez nos catégories, et partagez vos idées avec notre communauté.
+            Participez aux discussions et partagez vos idées avec notre communauté.
           </p>
           <div className="flex-none gap-4"> {/* Use gap for spacing */}
             <a href="/register" className="btn btn-secondary">Register</a> {/* Register button first */}
