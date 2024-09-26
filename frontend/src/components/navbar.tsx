@@ -12,7 +12,7 @@ const Navbar: React.FC = () => {
         localStorage.removeItem('userId'); // Remove stored user information (if any)
 
         // Redirect to the login page
-        router.push('/login');
+        router.push('/');
     };
 
     // Charger le thème depuis le localStorage ou définir le thème clair par défaut
@@ -89,12 +89,7 @@ const Navbar: React.FC = () => {
                     <ul
                         tabIndex={0}
                         className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
-                        <li>
-                            <a className="justify-between">
-                                Profile
-                            </a>
-                        </li>
-                        <li><a>Settings</a></li>
+                        <Link href="/accueil"><li><a>Accueil</a></li></Link>
                         <li><a onClick={handleLogout}>Logout</a></li> {/* Trigger logout onClick */}
                     </ul>
                 </div>
