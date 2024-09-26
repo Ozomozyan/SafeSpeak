@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation'; // Use this to handle redirection after logout
 
 const Navbar: React.FC = () => {
     const [theme, setTheme] = useState('light');
@@ -95,7 +95,7 @@ const Navbar: React.FC = () => {
                             </a>
                         </li>
                         <li><a>Settings</a></li>
-                        <li><a onClick={handleLogout}>Logout</a></li>
+                        <li><a onClick={handleLogout}>Logout</a></li> {/* Trigger logout onClick */}
                     </ul>
                 </div>
             </div>

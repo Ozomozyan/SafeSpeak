@@ -5,8 +5,12 @@
         "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/index.js\""
     },
     "dependencies": {
+        "@types/bcrypt": "^5.0.2",
+        "@types/crypto-js": "^4.2.2",
+        "bcrypt": "^5.1.1",
         "body-parser": "^1.20.3",
         "cors": "^2.8.5",
+        "crypto-js": "^4.2.0",
         "dotenv": "^16.4.5",
         "express.js": "^1.0.0",
         "mongoose": "^8.6.3",
