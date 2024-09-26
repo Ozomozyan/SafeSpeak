@@ -19,7 +19,7 @@ const App: React.FC = () => {
       {/* Hero Section */}
       <header
         className="min-h-screen bg-cover bg-center flex flex-col items-center justify-center text-white"
-        style={{ backgroundImage: 'url("https://img.daisyui.com/images/stock/photo-1494253109108-2e30c049369b.webp")' }}
+        style={{ backgroundImage: 'url("https://files.oaiusercontent.com/file-8kaAMRwliCy7jvYv410BCzFo?se=2024-09-26T08%3A01%3A22Z&sp=r&sv=2024-08-04&sr=b&rscc=max-age%3D604800%2C%20immutable%2C%20private&rscd=attachment%3B%20filename%3D60faacef-c9ce-4cd4-baf0-996ee7f89b1c.webp&sig=9DbCfZw/eDCEH9Co6axgmb%2BSf5jqZGxYzrdJ4TnSSaw%3D")' }}
       >
         <div className="text-center max-w-xl">
           <h1 className="text-6xl font-bold">Bienvenue sur le Forum</h1>
@@ -43,7 +43,6 @@ const App: React.FC = () => {
           <h4 className="font-bold">Liens utiles</h4>
           <a className="link link-hover">Accueil</a>
           <a className="link link-hover">Discussions</a>
-          <a className="link link-hover">Catégories</a>
         </div>
         <div>
           <h4 className="font-bold">Ressources</h4>

@@ -23,7 +23,6 @@ const Navbar: React.FC = () => {
                         <li>
                             <a className="justify-between">
                                 Profile
-                                <span className="badge">New</span>
                             </a>
                         </li>
                         <li><a>Settings</a></li>

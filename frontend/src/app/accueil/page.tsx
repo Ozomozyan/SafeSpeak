@@ -6,38 +6,6 @@ const Acceuil: React.FC = () => {
         <div className="bg-base-200">
             <Navbar />
 
-
-            {/* Section Services */}
-            <section className="py-16 text-center">
-                <h2 className="text-4xl font-bold mb-6">Nos Services</h2>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 px-6">
-                    <div className="card shadow-lg">
-                        <div className="card-body">
-                            <h3 className="card-title text-xl font-bold">Service 1</h3>
-                            <p>
-                                Nous offrons un service incroyable pour vous aider à développer votre entreprise rapidement et efficacement.
-                            </p>
-                        </div>
-                    </div>
-                    <div className="card shadow-lg">
-                        <div className="card-body">
-                            <h3 className="card-title text-xl font-bold">Service 2</h3>
-                            <p>
-                                Obtenez un accompagnement personnalisé grâce à notre équipe d'experts dédiée à votre succès.
-                            </p>
-                        </div>
-                    </div>
-                    <div className="card shadow-lg">
-                        <div className="card-body">
-                            <h3 className="card-title text-xl font-bold">Service 3</h3>
-                            <p>
-                                Profitez de nos solutions innovantes pour rester en avance sur vos concurrents.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
             {/* Section Discussions Récentes */}
             <section className="py-16 text-center">
                 <h2 className="text-4xl font-bold mb-6">Discussions récentes</h2>
@@ -72,19 +40,6 @@ const Acceuil: React.FC = () => {
                 </div>
                 <div className="mt-10">
                     <button className="btn btn-primary">Voir toutes les discussions</button>
-                </div>
-            </section>
-
-            {/* Section Catégories */}
-            <section className="py-16 bg-base-300">
-                <h2 className="text-4xl font-bold text-center mb-6">Catégories populaires</h2>
-                <div className="flex flex-wrap justify-center gap-4 px-6">
-                    <div className="badge badge-lg badge-primary">Technologie</div>
-                    <div className="badge badge-lg badge-primary">Actualités</div>
-                    <div className="badge badge-lg badge-primary">Divertissement</div>
-                    <div className="badge badge-lg badge-primary">Science</div>
-                    <div className="badge badge-lg badge-primary">Gaming</div>
-                    <div className="badge badge-lg badge-primary">Autres</div>
                 </div>
             </section>
 
