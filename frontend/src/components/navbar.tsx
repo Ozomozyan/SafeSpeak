@@ -1,8 +1,18 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation'; // Use this to handle redirection after logout
 
 const Navbar: React.FC = () => {
+    const router = useRouter();
+
+    const handleLogout = () => {
+        // Clear any session data (e.g., localStorage, sessionStorage, or cookies)
+        localStorage.removeItem('userId'); // Remove stored user information (if any)
+
+        // Redirect to the login page
+        router.push('/login');
+    };
     return (
         <div className="navbar bg-base-100">
             <div className="flex-1">
@@ -30,7 +40,7 @@ const Navbar: React.FC = () => {
                             </a>
                         </li>
                         <li><a>Settings</a></li>
-                        <li><a>Logout</a></li>
+                        <li><a onClick={handleLogout}>Logout</a></li> {/* Trigger logout onClick */}
                     </ul>
                 </div>
             </div>

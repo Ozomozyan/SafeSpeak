@@ -26,9 +26,9 @@ const App: React.FC = () => {
           <p className="mt-6 text-xl">
             Participez aux discussions, explorez nos catégories, et partagez vos idées avec notre communauté.
           </p>
-          <div className="mt-8">
-            <button className="btn btn-primary mr-4" onClick={handleCommencerClick}>Commencer</button>
-            <button className="btn btn-secondary">S'inscrire</button>
+          <div className="flex-none gap-2">
+              <a href="/login" className="btn btn-primary">Login</a>
+              <a href="/register" className="btn btn-secondary">Register</a>
           </div>
         </div>
       </header>
