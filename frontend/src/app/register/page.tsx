@@ -43,6 +43,8 @@ const Register = () => {
                 setError(data.error || 'Failed to register');
             } else {
                 setSuccess('User registered successfully!');
+                setEmail(''); // Clear email input on successful registration
+                setPassword(''); // Clear password input on successful registration
             }
         } catch (err) {
             console.error('Registration failed:', err);
@@ -51,31 +53,50 @@ const Register = () => {
     };
 
     return (
-        <div>
-            <h2>Register</h2>
-            {error && <p style={{ color: 'red' }}>{error}</p>}
-            {success && <p style={{ color: 'green' }}>{success}</p>}
-            <form onSubmit={handleRegister}>
-                <div>
-                    <label>Email</label>
-                    <input
-                        type="email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        required
-                    />
-                </div>
-                <div>
-                    <label>Password</label>
-                    <input
-                        type="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        required
-                    />
-                </div>
-                <button type="submit">Register</button>
-            </form>
+
+        <div className="flex items-center justify-center h-screen bg-gray-900"> {/* Dark background */}
+            <div className="w-full max-w-md p-8 space-y-4 bg-gray-800 rounded-lg shadow-md"> {/* Dark card */}
+                <h2 className="text-2xl font-bold text-center text-white">Register</h2> {/* White text */}
+                {error && <p className="text-red-400 text-sm text-center">{error}</p>} {/* Error in red */}
+                {success && <p className="text-green-400 text-sm text-center">{success}</p>} {/* Success in green */}
+                <form onSubmit={handleRegister} className="space-y-4">
+                    <div>
+                        <label className="block text-sm font-medium text-gray-300" htmlFor="email"> {/* Light gray label */}
+                            Email
+                        </label>
+                        <input
+                            type="email"
+                            id="email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            required
+                            className="w-full p-2 border border-gray-600 bg-gray-700 text-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" // Dark input with white text
+                        />
+                    </div>
+                    <div>
+                        <label className="block text-sm font-medium text-gray-300" htmlFor="password"> {/* Light gray label */}
+                            Password
+                        </label>
+                        <input
+                            type="password"
+                            id="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            required
+                            className="w-full p-2 border border-gray-600 bg-gray-700 text-white rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" // Dark input with white text
+                        />
+                    </div>
+                    <button
+                        type="submit"
+                        className="w-full p-2 text-white font-semibold bg-blue-600 hover:bg-blue-700 rounded-md" // Button styling
+                    >
+                        Register
+                    </button>
+                </form>
+                <p className="text-center text-sm text-gray-400">
+                    Already have an account? <a href="/login" className="text-blue-400 hover:underline">Login</a>
+                </p>
+            </div>
         </div>
     );
 };
