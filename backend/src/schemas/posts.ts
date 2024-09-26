@@ -12,7 +12,7 @@ export const PostType = z.object({
 });
 
 export const PostSchema = new Schema({
-    id: { type: Number, required: true },
+    id: { type: String, required: true },
     title: { type: String, required: true },
     content: { type: String, required: true },
     userId: { type: String, required: true },

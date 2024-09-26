@@ -4,6 +4,7 @@ import cors from "cors";
 
 import * as mongo from "./database/mongo";
 import * as auth from "./routes/auth";
+import * as post from "./routes/post";
 
 dotenv.config();
 const portEnv = process.env.PORT;
@@ -39,6 +40,7 @@ app.get("/", (_: Request, res: Response) => {
 });
 
 auth.configure(app);
+post.configure(app);
 
 app.listen(port, hostEnv, () => {
     console.log(`⚡️[server]: Server is running at http://${hostEnv}:${port}`);
