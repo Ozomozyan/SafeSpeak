@@ -14,7 +14,7 @@ interface Post {
 }
 
 const PostSchema = z.object({
-    id: z.string(),
+    id: z.string().or(z.number()),
     title: z.string(),
     content: z.string(),
     userId: z.string(),
@@ -22,11 +22,6 @@ const PostSchema = z.object({
     userName: z.string().optional(),
     replyTo: z.string().optional(),
 });
-const generateUniqueId = (): string => {
-    const timestamp = Date.now().toString(); // Obtenir le timestamp actuel
-    const randomNum = Math.floor(Math.random() * 1000); // Générer un nombre aléatoire
-    return `${timestamp}-${randomNum}`; // Combiner le timestamp et le nombre aléatoire
-};
 
 const Acceuil: React.FC = () => {
     const [posts, setPosts] = useState<Post[]>([]);
@@ -68,14 +63,14 @@ const Acceuil: React.FC = () => {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
-            const postId = generateUniqueId();
+
             const response = await fetch('http://localhost:9552/post/create', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    id: postId,
+
                     title: newPost.title,
                     content: newPost.content,
                     userId: 'user-id',
@@ -104,7 +99,7 @@ const Acceuil: React.FC = () => {
 
             {/* Section Créer un Post */}
             <section className="py-16 text-center">
-                <h2 className="text-4xl font-bold mb-6">Créer un nouveau post</h2>
+                <h2 className="text-4xl font-bold mb-6 text-primary">Créer un nouveau post</h2>
                 <form onSubmit={handleSubmit} className="mb-10">
                     <input
                         type="text"
@@ -129,10 +124,10 @@ const Acceuil: React.FC = () => {
 
             {/* Section Discussions Récentes */}
             <section className="py-16 text-center">
-                <h2 className="text-4xl font-bold mb-6">Discussions récentes</h2>
+                <h2 className="text-4xl font-bold mb-6 text-primary">Discussions récentes</h2>
                 {loading && <p>Chargement des discussions...</p>}
                 {error && <p className="text-red-500">{error}</p>}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-6 text-primary">
                     {posts.map((post) => (
                         <div className="card shadow-lg" key={post.id}>
                             <div className="card-body">

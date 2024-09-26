@@ -42,7 +42,7 @@ const UrgencePage: React.FC = () => {
         <div className="bg-base-200">
             <Navbar />
             <section className="py-16 text-center">
-                <h2 className="text-4xl font-bold mb-6">Numéros d'urgence et utiles</h2>
+                <h2 className="text-4xl font-bold mb-6 text-primary">Numéros d'urgence et utiles</h2>
                 <input
                     type="text"
                     placeholder="Rechercher un numéro..."
@@ -55,14 +55,14 @@ const UrgencePage: React.FC = () => {
                         <div className="card shadow-lg hover:shadow-2xl transition-shadow duration-300" key={index}>
                             <div className="card-body">
                                 <h3 className="card-title text-xl font-bold text-primary">{item.number}</h3>
-                                <p className="text-white">{item.description}</p>
+                                <p className=" text-primary">{item.description}</p>
                             </div>
                         </div>
                     ))}
                 </div>
                 {/* Section d'information supplémentaire */}
                 <div className="mt-12">
-                    <h3 className="text-2xl font-semibold">Conseils en cas d'urgence</h3>
+                    <h3 className="text-2xl font-semibold text-primary">Conseils en cas d'urgence</h3>
                     <p className="mt-4 text-gray-600">En cas d'urgence, gardez votre calme et fournissez des informations claires. Donnez votre localisation, le type d'urgence et toute autre information pertinente.</p>
                 </div>
             </section>
